@@ -1,5 +1,9 @@
 package com.algorithm.binary_search_tree;
 
+/**
+ * 二元搜尋樹
+ * 利用 List 實作
+ */
 public class BST_List {
 
     private int[] nums;
