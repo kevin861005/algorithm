@@ -99,7 +99,7 @@ public class BST_List {
                 node_final = node.right;
             }
             // left x 接骨概念 - 被刪除的節點，只剩左邊 - 將左節點回傳給上一層接上
-            else if ( node.left == null && node.right == null ) {
+            else if ( node.left != null && node.right == null ) {
                 node_final = node.left;
             }
             // left right 接骨概念 - 被刪除的節點，只剩左右邊
@@ -108,7 +108,7 @@ public class BST_List {
                 BST_Node node_min = getMinNode(node.right);
                 swap_node_value(node, node_min);
                 // 開啟第二戰場，最後會停在「被刪除節點，只剩右邊」這個狀態
-                BST_Node node_child = delete(node.right, node.value);
+                BST_Node node_child = delete(node.right, value);
                 if ( node.right != node_child ) {
                     node.right = node_child;
                 }
@@ -158,7 +158,7 @@ public class BST_List {
         while ( true ) {
             if ( max.right == null ) break;
 
-            max = max.left;
+            max = max.right;
         }
 
         return max;
@@ -205,27 +205,45 @@ public class BST_List {
 
         // delete
         // x x
-        list.delete(7);
-        System.out.println();
+//        list.delete(7);
+//        System.out.println();
 
         // x right
-        list.delete(6);
-        System.out.println();
+//        list.delete(6);
+//        System.out.println();
 
         // left x
-        list.delete(4);
-        System.out.println();
+//        list.delete(4);
+//        System.out.println();
 
         // left right
-        list.delete(2);
-        System.out.println();
+//        list.delete(2);
+//        System.out.println();
 
         // delete root
-        list.delete(5);
-        System.out.println();
+//        list.delete(5);
+//        System.out.println();
 
         // search
-        BST_Node node_found = list.search(2);
-        BST_Node node_not_found = list.search(10);
+//        BST_Node node_found = list.search(2);
+//        BST_Node node_not_found = list.search(10);
+
+        // in-order traversal = n * (getMinNode + delete)
+//        while ( true ) {
+//            BST_Node node_min = list.getMinNode();
+//            if ( node_min == null ) break;
+//
+//            System.out.print( node_min.value + " " );
+//            list.delete(node_min.value);
+//        }
+
+        // in-order traversal = n * (getMaxNode + delete)
+//        while ( true ) {
+//            BST_Node node_max = list.getMaxNode();
+//            if ( node_max == null ) break;
+//
+//            System.out.print( node_max.value + " " );
+//            list.delete(node_max.value);
+//        }
     }
 }
