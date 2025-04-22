@@ -14,8 +14,8 @@ package com.algorithm.leetcode;
  *         this.right = right;
  *     }
  * }
- */
-/**
+ * <br/>
+ * <br/>
  * <a href="https://leetcode.com/problems/validate-binary-search-tree/">validate-binary-search-tree</a>
  */
 public class leetcode_validBST {
