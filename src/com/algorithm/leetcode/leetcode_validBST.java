@@ -1,10 +1,6 @@
 package com.algorithm.leetcode;
 
 /**
- * <a href="https://leetcode.com/problems/validate-binary-search-tree/">...</a>
- */
-
-/**
  * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
@@ -18,6 +14,9 @@ package com.algorithm.leetcode;
  *         this.right = right;
  *     }
  * }
+ */
+/**
+ * <a href="https://leetcode.com/problems/validate-binary-search-tree/">validate-binary-search-tree</a>
  */
 public class leetcode_validBST {
     static class TreeNode {

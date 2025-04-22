@@ -1,9 +1,5 @@
 package com.algorithm.leetcode;
 
-/**
- * <a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/">...</a>
- */
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +17,9 @@ import java.util.List;
  *         this.right = right;
  *     }
  * }
+ */
+/**
+ * <a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/">find-mode-in-binary-search-tree</a>
  */
 public class leetcode_find_mode_in_binary_search_tree {
 

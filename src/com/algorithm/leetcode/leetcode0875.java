@@ -1,7 +1,7 @@
 package com.algorithm.leetcode;
 
 /**
- * <a href="https://leetcode.com/problems/koko-eating-bananas/">...</a>
+ * <a href="https://leetcode.com/problems/koko-eating-bananas/">koko-eating-bananas</a>
  */
 public class leetcode0875 {
 

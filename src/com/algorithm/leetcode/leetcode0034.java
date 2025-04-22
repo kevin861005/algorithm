@@ -1,7 +1,7 @@
 package com.algorithm.leetcode;
 
 /**
- * <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">...</a>
+ * <a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/">find-first-and-last-position-of-element-in-sorted-array</a>
  */
 public class leetcode0034 {
 

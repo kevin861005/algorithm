@@ -1,7 +1,7 @@
 package com.algorithm.leetcode;
 
 /**
- * <a href="https://leetcode.com/problems/same-tree/description/">...</a>
+ * <a href="https://leetcode.com/problems/same-tree/description/">same-tree</a>
  */
 public class leetcode100_SameTree {
     public boolean isSameTree (TreeNode p, TreeNode q) {
