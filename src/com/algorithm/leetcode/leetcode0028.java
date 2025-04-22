@@ -7,9 +7,13 @@ public class leetcode0028 {
 
     // BigO: i * j
     public int strStr_01 (String haystack, String needle) {
-        if ( haystack == null || needle == null || needle.length() > haystack.length() ) return -1;
+        if ( haystack == null || needle == null || needle.length() > haystack.length() ) {
+            return - 1;
+        }
 
-        if ( needle.isEmpty() ) return 0;
+        if ( needle.isEmpty() ) {
+            return 0;
+        }
 
         for ( int i = 0 ; i <= haystack.length() - needle.length() ; i++ ) {
             if ( haystack.charAt(i) == needle.charAt(0) ) {
@@ -22,11 +26,13 @@ public class leetcode0028 {
                     }
                 }
 
-                if ( found ) return i;
+                if ( found ) {
+                    return i;
+                }
             }
         }
 
-        return -1;
+        return - 1;
     }
 
     int magic_num = 31;
@@ -96,9 +102,13 @@ public class leetcode0028 {
 
     // BigO: O(1)
     public int strStr (String haystack, String needle) {
-        if ( haystack == null || needle == null || needle.length() > haystack.length() ) return -1;
+        if ( haystack == null || needle == null || needle.length() > haystack.length() ) {
+            return - 1;
+        }
 
-        if ( needle.isEmpty() ) return 0;
+        if ( needle.isEmpty() ) {
+            return 0;
+        }
 
         for ( int i = 0 ; i <= haystack.length() - needle.length() ; i++ ) {
             String haystack_part = haystack.substring(i, i + needle.length());
@@ -107,6 +117,6 @@ public class leetcode0028 {
             }
         }
 
-        return -1;
+        return - 1;
     }
 }
