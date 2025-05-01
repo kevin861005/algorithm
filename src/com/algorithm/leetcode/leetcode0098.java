@@ -18,7 +18,7 @@ package com.algorithm.leetcode;
  * <br/>
  * <a href="https://leetcode.com/problems/validate-binary-search-tree/">validate-binary-search-tree</a>
  */
-public class leetcode_validBST {
+public class leetcode0098 {
     static class TreeNode {
         int val;
         TreeNode left;

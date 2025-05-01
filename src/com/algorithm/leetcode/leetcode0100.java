@@ -3,7 +3,7 @@ package com.algorithm.leetcode;
 /**
  * <a href="https://leetcode.com/problems/same-tree/description/">same-tree</a>
  */
-public class leetcode100_SameTree {
+public class leetcode0100 {
     public boolean isSameTree (TreeNode p, TreeNode q) {
         if ( p == null && q == null ) return true;
         if ( p == null || q == null ) return false;
