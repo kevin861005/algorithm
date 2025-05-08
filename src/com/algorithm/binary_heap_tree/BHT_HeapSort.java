@@ -7,7 +7,7 @@ package com.algorithm.binary_heap_tree;
  */
 public class BHT_HeapSort {
 
-    // BigO : n * log(n)
+    // BigO : n * log(n) ===> 元素個數 * 階層數
     public static void heap_sort_ascending (int[] nums) {
         // convert to BHT
         BHT_MaxHeap bht_max_heap = new BHT_MaxHeap(nums);
