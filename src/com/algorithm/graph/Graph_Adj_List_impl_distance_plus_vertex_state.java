@@ -22,12 +22,12 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
         this.vertex_states = new char[vertex_num];
 
         // initializa
-        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src ++ ) {
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
             this.adj_list[i_vertex_src] = new LinkedList<>();
         }
 
         char c = 'A';
-        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src ++ ) {
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
             vertex_states[i_vertex_src] = (char) (c + i_vertex_src);
         }
     }
@@ -40,7 +40,7 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
     public EdgeState get_edge (int i_vertex_src, int i_vertex_dest) {
         List<EdgeState> adj_list_src = adj_list[i_vertex_src];
 
-        for ( int i = 0 ; i < adj_list_src.size() ; i ++ ) {
+        for ( int i = 0 ; i < adj_list_src.size() ; i++ ) {
             if ( adj_list_src.get(i).i_vertex_destination == i_vertex_dest ) {
                 return adj_list_src.get(i);
             }
@@ -52,7 +52,7 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
     public void remove_edge (int i_vertex_src, int i_vertex_dest) {
         List<EdgeState> adj_list_src = adj_list[i_vertex_src];
 
-        for ( int i = 0 ; i < adj_list_src.size() ; i ++ ) {
+        for ( int i = 0 ; i < adj_list_src.size() ; i++ ) {
             if ( adj_list_src.get(i).i_vertex_destination == i_vertex_dest ) {
                 adj_list_src.remove(i);
             }
@@ -60,12 +60,14 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
     }
 
     public void print_adj_matrix () {
-        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src ++ ) {
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
             System.out.printf("[%c] ", vertex_states[i_vertex_src]);
 
             List<EdgeState> adj_list_src = adj_list[i_vertex_src];
-            for ( int i = 0 ; i < adj_list_src.size() ; i ++ ) {
-                System.out.printf("-> [%c,%d] ", vertex_states[adj_list_src.get(i).i_vertex_destination], adj_list_src.get(i).distance);
+            for ( int i = 0 ; i < adj_list_src.size() ; i++ ) {
+                System.out.printf("-> [%c,%d] ", vertex_states[adj_list_src.get(i).i_vertex_destination],
+                                  adj_list_src.get(i).distance
+                );
             }
             System.out.println();
         }
@@ -85,13 +87,15 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
             }
 
             Integer i_vertex_now = queue.poll();
-            if ( visited.contains(i_vertex_now) ) continue;
+            if ( visited.contains(i_vertex_now) ) {
+                continue;
+            }
             visited.add(i_vertex_now);
 
             System.out.printf("%c ", vertex_states[i_vertex_now]);
 
             List<EdgeState> neighbors = adj_list[i_vertex_now];
-            for ( int i = 0 ; i < neighbors.size() ; i ++ ) {
+            for ( int i = 0 ; i < neighbors.size() ; i++ ) {
                 queue.offer(neighbors.get(i).i_vertex_destination);
             }
         }
@@ -104,11 +108,13 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
     }
 
     private void traverse_dfs_recursion (int i_vertex_now, Set<Integer> visited) {
-        if ( visited.contains(i_vertex_now) ) return;
+        if ( visited.contains(i_vertex_now) ) {
+            return;
+        }
         visited.add(i_vertex_now);
 
         // 前序遍歷
-//        System.out.printf("%c ", vertex_states[i_vertex_now]);
+        //        System.out.printf("%c ", vertex_states[i_vertex_now]);
 
         List<EdgeState> neighbors = adj_list[i_vertex_now];
 
@@ -120,9 +126,47 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
         System.out.printf("%c ", vertex_states[i_vertex_now]);
     }
 
+    public void topological_sort_dfs () {
+        System.out.printf("\ntopological_sort (dfs): ");
+
+        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
+            if ( visited.contains(i_vertex_src) ) {
+                continue;
+            }
+            topological_sort_dfs_recursion(i_vertex_src, visited, stack);
+        }
+
+        while ( true ) {
+            if ( stack.isEmpty() ) {
+                break;
+            }
+            Integer i_vertex = stack.pop();
+            System.out.printf("%c ", vertex_states[i_vertex]);
+        }
+    }
+
+    private void topological_sort_dfs_recursion (int i_vertex_src, Set<Integer> visited, Stack<Integer> stack) {
+        if ( visited.contains(i_vertex_src) ) {
+            return;
+        }
+        visited.add(i_vertex_src);
+
+        List<EdgeState> neighbors = adj_list[i_vertex_src];
+
+        for ( int i = 0 ; i < neighbors.size() ; i++ ) {
+            EdgeState neighbor = neighbors.get(i);
+            topological_sort_dfs_recursion(neighbor.i_vertex_destination, visited, stack);
+        }
+
+        stack.push(i_vertex_src);
+    }
+
     public static void main (String[] args) {
-        Graph_Adj_List_impl_distance_plus_vertex_state
-                graph_adj_list_impl_distance_plus_vertex_state = new Graph_Adj_List_impl_distance_plus_vertex_state(5);
+        Graph_Adj_List_impl_distance_plus_vertex_state graph_adj_list_impl_distance_plus_vertex_state =
+                new Graph_Adj_List_impl_distance_plus_vertex_state(5);
 
         graph_adj_list_impl_distance_plus_vertex_state.add_edge(0, 1, 1);
         graph_adj_list_impl_distance_plus_vertex_state.add_edge(0, 2, 3);
@@ -140,5 +184,20 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
 
         graph_adj_list_impl_distance_plus_vertex_state.traverse_bfs(0);
         graph_adj_list_impl_distance_plus_vertex_state.traverse_dfs(0);
+
+        graph_adj_list_impl_distance_plus_vertex_state =
+                new Graph_Adj_List_impl_distance_plus_vertex_state(6);
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(0, 1, 1);
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(0, 2, 1);
+
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(1, 4, 1);
+
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(3, 2, 1);
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(3, 4, 1);
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(3, 5, 1);
+
+        graph_adj_list_impl_distance_plus_vertex_state.add_edge(5, 4, 1);
+
+        graph_adj_list_impl_distance_plus_vertex_state.topological_sort_dfs();
     }
 }
