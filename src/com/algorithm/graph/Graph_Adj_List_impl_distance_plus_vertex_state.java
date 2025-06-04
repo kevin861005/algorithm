@@ -16,12 +16,14 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
 
     private List<EdgeState>[] adj_list;
     private char[] vertex_states;
+    private Integer[] vertex_states_indegrees;
 
     public Graph_Adj_List_impl_distance_plus_vertex_state (int vertex_num) {
         this.adj_list = new List[vertex_num];
         this.vertex_states = new char[vertex_num];
+        this.vertex_states_indegrees = new Integer[vertex_num];
 
-        // initializa
+        // initialize
         for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
             this.adj_list[i_vertex_src] = new LinkedList<>();
         }
@@ -29,6 +31,10 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
         char c = 'A';
         for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
             vertex_states[i_vertex_src] = (char) (c + i_vertex_src);
+        }
+
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
+            vertex_states_indegrees[i_vertex_src] = 0;
         }
     }
 
@@ -164,6 +170,61 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
         stack.push(i_vertex_src);
     }
 
+    public void topological_sort_indegree () {
+        System.out.printf("\ntopological_sort (indegree): ");
+
+        // 1. calculate in-degree count
+        Set<Integer> visited = new HashSet<>();
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
+            if ( visited.contains(i_vertex_src) ) continue;
+
+            calculate_indegree(i_vertex_src, visited);
+        }
+
+        // 2. find vertex with 0 in-degree count
+        Queue<Integer> queue = new LinkedList<>();
+        for ( int i_vertex_src = 0 ; i_vertex_src < adj_list.length ; i_vertex_src++ ) {
+            if ( vertex_states_indegrees[i_vertex_src] == 0 ) {
+                queue.offer(i_vertex_src);
+            }
+        }
+
+        // 3. repeat 2. + update in-degree count
+        while ( true ) {
+            if ( queue.isEmpty() ) break;
+
+            Integer i_vertex = queue.poll();
+            System.out.printf("%c ", vertex_states[i_vertex]);
+
+            List<EdgeState> neighbors = adj_list[i_vertex];
+            for ( int i = 0 ; i < neighbors.size() ; i++ ) {
+                EdgeState neighbor = neighbors.get(i);
+
+                // main logic
+                vertex_states_indegrees[neighbor.i_vertex_destination]--;
+
+                if ( vertex_states_indegrees[neighbor.i_vertex_destination] == 0 ) {
+                    queue.offer(neighbor.i_vertex_destination);
+                }
+            }
+        }
+    }
+
+    private void calculate_indegree (int i_vertex_src, Set<Integer> visited) {
+        if ( visited.contains(i_vertex_src) ) return;
+        visited.add(i_vertex_src);
+
+        List<EdgeState> neighbors = adj_list[i_vertex_src];
+        for ( int i = 0 ; i < neighbors.size() ; i++ ) {
+            EdgeState neighbor = neighbors.get(i);
+
+            // main logic
+            vertex_states_indegrees[neighbor.i_vertex_destination]++;
+
+            calculate_indegree(neighbor.i_vertex_destination, visited);
+        }
+    }
+
     public static void main (String[] args) {
         Graph_Adj_List_impl_distance_plus_vertex_state graph_adj_list_impl_distance_plus_vertex_state =
                 new Graph_Adj_List_impl_distance_plus_vertex_state(5);
@@ -199,5 +260,6 @@ public class Graph_Adj_List_impl_distance_plus_vertex_state {
         graph_adj_list_impl_distance_plus_vertex_state.add_edge(5, 4, 1);
 
         graph_adj_list_impl_distance_plus_vertex_state.topological_sort_dfs();
+        graph_adj_list_impl_distance_plus_vertex_state.topological_sort_indegree();
     }
 }
