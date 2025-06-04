@@ -15,7 +15,7 @@ public class BinaryTree_Array_BFS {
     }
 
     public void traverse_level_order_bfs () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         Queue<Integer> queue = new LinkedList<Integer>();
         int i_root = 0;
