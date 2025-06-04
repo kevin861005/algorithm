@@ -27,7 +27,7 @@ public class BinaryTree_List {
 
     // 非本章學習重點，本方法僅模擬測試資料用
     public void build_tree () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 

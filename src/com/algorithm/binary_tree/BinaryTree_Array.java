@@ -13,7 +13,7 @@ public class BinaryTree_Array {
 
     // pre-order traversal DFS left
     public void pre_order_traversal_dfs_left () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
@@ -38,7 +38,7 @@ public class BinaryTree_Array {
 
     // in-order traversal DFS left
     public void in_order_traversal_dfs_left () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
@@ -64,7 +64,7 @@ public class BinaryTree_Array {
 
     // post-order traversal DFS left
     public void post_order_traversal_dfs_left () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
@@ -90,7 +90,7 @@ public class BinaryTree_Array {
 
     // pre-order traversal DFS right
     public void pre_order_traversal_dfs_right () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
@@ -115,7 +115,7 @@ public class BinaryTree_Array {
 
     // in-order traversal DFS right
     public void in_order_traversal_dfs_right () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
@@ -142,7 +142,7 @@ public class BinaryTree_Array {
 
     // post-order traversal DFS right
     public void post_order_traversal_dfs_right () {
-        if ( this.nums.length < 0 ) return;
+        if ( this.nums.length <= 0 ) return;
 
         if ( this.nums[0] == null ) return;
 
